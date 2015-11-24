@@ -16,8 +16,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/login/$', auth_views.login,
+    {'template_name': 'django_sb_admin/examples/login.html'}),
+    url(r'^django-sb-admin/', include('django_sb_admin.urls')),
     url(r'^', include('apps.core.urls', namespace='core')),
+    url(r'^ejemplo/', include('apps.dental_office.urls', namespace='dental_office')),
 ]
