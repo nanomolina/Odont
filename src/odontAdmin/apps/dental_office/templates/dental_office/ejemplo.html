@@ -1,8 +1,40 @@
 {% extends "django_sb_admin/base.html" %}
+{% load staticfiles %}
 
+{% block sb_admin_custom_css %}
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'dental_office/css/todo.css' %}" >
+{% endblock sb_admin_custom_css %}
 
-{% block sb_admin_header %}Header of the page{% endblock sb_admin_header %}
-{% block sb_admin_title %}Title of the content the page{% endblock sb_admin_title %}
+{% block sb_admin_header %}Angular{% endblock sb_admin_header %}
+{% block sb_admin_title %}Angular example{% endblock sb_admin_title %}
+{% block sb_admin_subheading %}{% endblock sb_admin_subheading %}
 {% block sb_admin_sidebar %}left sidebar{% endblock sb_admin_sidebar %}
 {% block sb_admin_navbar_right %}right top navbar{% endblock sb_admin_navbar_right %}
-{% block sb_admin_content %}content{% endblock sb_admin_content %}
+
+{% block sb_admin_content %}
+{% verbatim %}
+<div ng-app="todoApp">
+  <h2>Todo</h2>
+  <div ng-controller="TodoListController as todoList">
+    <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+    [ <a href="" ng-click="todoList.archive()">archive</a> ]
+    <ul class="unstyled">
+      <li ng-repeat="todo in todoList.todos">
+        <input type="checkbox" ng-model="todo.done">
+        <span class="done-{{todo.done}}">{{todo.text}}</span>
+      </li>
+    </ul>
+    <form ng-submit="todoList.addTodo()">
+      <input type="text" ng-model="todoList.todoText"  size="30"
+             placeholder="add new todo here">
+      <input class="btn-primary" type="submit" value="add">
+    </form>
+  </div>
+</div>
+{% endverbatim %}
+{% endblock sb_admin_content %}
+
+{% block sb_admin_custom_js %}
+  <script src="{% static 'dental_office/js/todo.js' %}"></script>
+{% endblock sb_admin_custom_js %}
