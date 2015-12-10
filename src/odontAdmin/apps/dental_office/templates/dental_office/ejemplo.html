@@ -1,8 +1,37 @@
 {% extends "django_sb_admin/base.html" %}
 
 
-{% block sb_admin_header %}Header of the page{% endblock sb_admin_header %}
-{% block sb_admin_title %}Title of the content the page{% endblock sb_admin_title %}
+{% block sb_admin_header %}BACKBONE{% endblock sb_admin_header %}
+{% block sb_admin_title %}Backbone example{% endblock sb_admin_title %}
+{% block sb_admin_subheading %}{% endblock sb_admin_subheading %}
 {% block sb_admin_sidebar %}left sidebar{% endblock sb_admin_sidebar %}
 {% block sb_admin_navbar_right %}right top navbar{% endblock sb_admin_navbar_right %}
-{% block sb_admin_content %}content{% endblock sb_admin_content %}
+
+
+{% block sb_admin_content %}
+  <div id="container">Loading...</div>
+{% endblock sb_admin_content %}
+
+
+{% block sb_admin_custom_js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
+
+  <script type="text/javascript">
+    var AppView = Backbone.View.extend({
+      // el - stands for element. Every view has a element associate in with HTML content will be rendered.
+      el: '#container',
+      // It's the first function called when this view it's instantiated.
+      initialize: function(){
+        this.render();
+      },
+      // $el - it's a cached jQuery object (el), in which you can use jQuery functions to push content. Like the Hello World in this case.
+      render: function(){
+        this.$el.html("Hello World");
+      }
+    });
+
+    var appView = new AppView();
+  </script>
+{% endblock sb_admin_custom_js %}
