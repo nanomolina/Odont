@@ -71,6 +71,7 @@ app.TodoView = Backbone.View.extend({
   },
   destroy: function(){
     this.model.destroy();
+    app.appView.subtractCounter();
   }
 });
 
@@ -79,6 +80,7 @@ app.AppView = Backbone.View.extend({
   el: '#todoapp',
   initialize: function () {
     this.input = this.$('#new-todo');
+    this.counter = 0;
     app.todoList.on('add', this.addAll, this);
     app.todoList.on('reset', this.addAll, this);
     app.todoList.fetch(); // Loads list from local storage
@@ -100,12 +102,24 @@ app.AppView = Backbone.View.extend({
   addAll: function(){
     this.$('#todo-list').html(''); // clean the todo list
     app.todoList.each(this.addOne, this);
+    this.addCounter();
   },
   newAttributes: function(){
     return {
       title: this.input.val().trim(),
       completed: false
     }
+  },
+  addCounter: function() {
+    this.counter++;
+    this.updateCounter();
+  },
+  subtractCounter: function() {
+    this.counter--;
+    this.updateCounter();
+  },
+  updateCounter: function() {
+    $('#counter').text(this.counter);
   }
 });
 
