@@ -1,0 +1,51 @@
+{% extends "django_sb_admin/base.html" %}
+
+<!-- Head -->
+{% block sb_admin_description %}{% endblock %}
+{% block sb_admin_author %}{% endblock %}
+{% block title %}{% endblock %}
+{% block sb_admin_custom_css %}{% endblock %}
+
+<!-- Body -->
+{% block sb_admin_header %}OdontApp{% endblock %}
+{% block sb_admin_header_url %}{% url 'core:home' %}{% endblock %}
+{% block sb_admin_title %}Main Page{% endblock %}
+{% block sb_admin_subheading %}{% endblock %}
+
+{% block sb_admin_sidebar %}
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav side-nav">
+          <li {% if nav_active == "start" %}class="active"{% endif %}>
+              <a href='#'><i class="fa fa-play"></i> Start</a>
+          </li>
+          <!--<li {% if nav_active == "dashboard" %}class="active"{% endif %}>
+              <a href='#'><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+          </li>
+          <li {% if nav_active == "charts" %}class="active"{% endif %}>
+              <a href='#'><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+          </li>
+          <li {% if nav_active == "tables" %}class="active"{% endif %}>
+              <a href='#'><i class="fa fa-fw fa-table"></i> Tables</a>
+          </li>
+          <li {% if nav_active == "bootstrap_grid" %}class="active"{% endif %}>
+              <a href='#'><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+          </li> -->
+          <li>
+              <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-users"></i> Personas <i class="fa fa-fw fa-caret-down"></i></a>
+              <ul id="demo" class="collapse">
+                  <li>
+                      <a href="#">Pacientes</a>
+                  </li>
+                  <li>
+                      <a href="#">Doctores</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+{% endblock %}
+{% block sb_admin_breadcrumb %}{% endblock %}
+{% block sb_admin_breadcrumb_active %}{% endblock %}
+{% block sb_admin_navbar_right %}right top navbar{% endblock %}
+{% block sb_admin_content %}content{% endblock %}
+{% block sb_admin_custom_js %}{% endblock %}
