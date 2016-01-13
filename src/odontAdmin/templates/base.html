@@ -1,51 +1,47 @@
 {% extends "django_sb_admin/base.html" %}
-{% load staticfiles %}
 
-<!-- Head -->
-{% block sb_admin_description %}{% endblock %}
-{% block sb_admin_author %}{% endblock %}
-{% block title %}{% endblock %}
-{% block sb_admin_custom_css %}{% endblock %}
+{% block title %}My office{% endblock %}
+{% block sb_admin_header_url %}{% url 'office:home' %}{% endblock %}
+{% block sb_admin_header %}MY OFFICE{% endblock %}
 
-<!-- Body -->
-{% block sb_admin_header %}OdontApp{% endblock %}
-{% block sb_admin_header_url %}{% url 'core:home' %}{% endblock %}
-{% block sb_admin_title %}Main Page{% endblock %}
-{% block sb_admin_subheading %}{% endblock %}
+{% block sb_admin_navbar_right %}
+<ul class="nav navbar-right top-nav">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {% if user.username %}{{ user.username }}{% else %}Anonymous{% endif %} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
 
 {% block sb_admin_sidebar %}
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav side-nav">
-          <li {% if nav_active == "start" %}class="active"{% endif %}>
-              <a href='#'><i class="fa fa-play"></i> Start</a>
-          </li>
-          <li>
-              <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-users"></i> Personas <i class="fa fa-fw fa-caret-down"></i></a>
-              <ul id="demo" class="collapse">
-                  <li>
-                      <a href="javascript: go_to_patients()"><i class="fa fa-user"></i> Pacientes</a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fa fa-user-md"></i> Doctores</a>
-                  </li>
-              </ul>
-          </li>
-      </ul>
-  </div>
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li {% if nav_active == "start" %}class="active"{% endif %}>
+            <a href="{% url "office:home" %}"><i class="fa fa-home"></i> Home</a>
+        </li>
+    </ul>
+</div>
 {% endblock %}
-{% block sb_admin_breadcrumb %}{% endblock %}
-{% block sb_admin_breadcrumb_active %}{% endblock %}
-{% block sb_admin_navbar_right %}right top navbar{% endblock %}
+
+{% block sb_admin_title %}Title{% endblock sb_admin_title %}
+{% block sb_admin_subheading %}<small>introduction</small>{% endblock sb_admin_subheading %}
+
+{% block breadcumb %}{% endblock breadcumb %}
+
 
 {% block sb_admin_content %}
-  <div id="main-content" class="row"></div>
-{% endblock %}
-
-{% block sb_admin_custom_js %}
-  <script type="text/javascript">
-    function go_to_patients() {
-      var url_patients = "{% url 'dental_office:patients' %}";
-      $('#main-content').load(url_patients, function() {});
-    }
-  </script>
-{% endblock %}
+{% endblock sb_admin_content %}
