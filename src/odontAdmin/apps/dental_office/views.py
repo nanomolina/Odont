@@ -6,3 +6,9 @@ def ejemplo(request):
         'dental_office/ejemplo.html',
         context_instance=RequestContext(request)
     )
+
+def patients(request):
+    return render_to_response(
+        'dental_office/patients.html',
+        context_instance=RequestContext(request)
+    )
